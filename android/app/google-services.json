@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "169554526813",
+    "project_id": "mobileappfcm-88c43",
+    "storage_bucket": "mobileappfcm-88c43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169554526813:android:edccd482936a249a4283b4",
+        "android_client_info": {
+          "package_name": "com.example.student_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169554526813-5b987lma92hs6va4adg85rkucp8k9vfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSsMx8rAIxDtwrTZ304-mpxAYRbwM3X1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169554526813-5b987lma92hs6va4adg85rkucp8k9vfc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169554526813-l6ihfjm234j9aotssnru120mnbts60gj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.essplus.online"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169554526813:android:7da32e02be36659d4283b4",
+        "android_client_info": {
+          "package_name": "com.gj.ess_plus_online"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169554526813-5b987lma92hs6va4adg85rkucp8k9vfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSsMx8rAIxDtwrTZ304-mpxAYRbwM3X1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169554526813-5b987lma92hs6va4adg85rkucp8k9vfc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169554526813-l6ihfjm234j9aotssnru120mnbts60gj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.essplus.online"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169554526813:android:7935fe5f2f0d69ce4283b4",
+        "android_client_info": {
+          "package_name": "com.school.ess_plus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169554526813-5b987lma92hs6va4adg85rkucp8k9vfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSsMx8rAIxDtwrTZ304-mpxAYRbwM3X1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169554526813-5b987lma92hs6va4adg85rkucp8k9vfc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169554526813-l6ihfjm234j9aotssnru120mnbts60gj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.essplus.online"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
