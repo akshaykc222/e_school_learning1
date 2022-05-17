@@ -14,6 +14,7 @@ class NotificationReportStaff extends StatelessWidget {
       length: loginType == LoginType.staff ? 2 : 1,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: UIGuide.PRIMARY,
           title: const Text('Notification Report'),
           bottom: loginType == LoginType.staff
               ? const TabBar(tabs: [

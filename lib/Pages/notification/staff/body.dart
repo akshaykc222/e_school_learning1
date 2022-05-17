@@ -42,6 +42,7 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
     });
   }
 
+  final staffController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     bool _isChecked = false;
@@ -78,33 +79,6 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
                             showSelectedItems: true,
                             items: snapshot.stafflist
                                 .map((e) => e.staffRole ?? "")
-                                .toSet()
-                                .toList(),
-                          );
-                        }),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 1),
-                        child: Consumer<StaffNotification>(
-                            builder: (context, snapshot, child) {
-                          return DropdownSearch<String>.multiSelection(
-                            label: "Designation",
-
-                            mode: Mode.DIALOG,
-                            popupTitle: const Text("Select Designation"),
-
-                            showSearchBox: true,
-
-                            onChanged: (List<String> val) {
-                              snapshot.addFilters(val.first);
-                            },
-                            showSelectedItems: true,
-
-                            //items: snapshot.stafflist.map((e) =>e.division ).toSet().toList(),
-                            items: snapshot.stafflist
-                                .map((e) => e.designation ?? "")
                                 .toSet()
                                 .toList(),
                           );
@@ -157,7 +131,11 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
                               color: UIGuide.PRIMARY,
                               fontWeight: FontWeight.bold),
                         ),
-                        SvgPicture.asset(UIGuide.notcheck),
+                        InkWell(
+                            onTap: () {
+                              snap.selectAllStaff();
+                            },
+                            child: SvgPicture.asset(UIGuide.notcheck)),
                       ],
                     ),
                   )

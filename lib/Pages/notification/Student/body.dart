@@ -251,7 +251,7 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

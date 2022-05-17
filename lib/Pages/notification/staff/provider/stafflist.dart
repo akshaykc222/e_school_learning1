@@ -100,6 +100,20 @@ class StaffNotification with ChangeNotifier {
     notifyListeners();
   }
 
+  void selectAllStaff() {
+    if (stafflist.first.selected == true) {
+      stafflist.forEach((element) {
+        element.selected = false;
+      });
+    } else {
+      stafflist.forEach((element) {
+        element.selected = true;
+      });
+    }
+
+    notifyListeners();
+  }
+
   submit(
     BuildContext context,
   ) {
