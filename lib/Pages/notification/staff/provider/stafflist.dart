@@ -53,6 +53,7 @@ class StaffNotification with ChangeNotifier {
       "SchoolId": _pref.getString('schoolId'),
       "AcademicyearId": parsedResponse['AcademicYearId']
     });
+    print("${parsedResponse['AcademicYearId']}");
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

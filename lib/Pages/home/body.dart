@@ -119,7 +119,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           splashColor: Colors.grey,
                           onTap: () {
                             Provider.of<HomeProvider>(context, listen: false)
-                                .setselectedMenumodel(menuList[position]);
+                                .setselectedMenumodel(
+                                    menuList[position], context);
                           },
                           child: Center(
                             child: Column(
@@ -309,7 +310,7 @@ class HeaderWidget extends StatelessWidget {
       child: InkWell(
         onTap: () async {
           SharedPreferences _pref = await SharedPreferences.getInstance();
-          _pref.clear();
+          _pref.remove('accesstoken');
           Navigator.of(context).pushNamedAndRemoveUntil(
               routeLoginmain, (Route<dynamic> route) => false);
         },

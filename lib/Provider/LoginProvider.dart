@@ -40,8 +40,11 @@ class LoginProvider with ChangeNotifier {
 
   Future getToken(BuildContext context) async {
     Map<String, dynamic> data = await parseJWT();
-
-    var headers = {'Content-Type': 'application/json'};
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${_pref.getString('accesstoken')}'
+    };
     String? token = await FirebaseMessaging.instance.getToken();
     print("firebase token");
     print(token);
@@ -57,11 +60,21 @@ class LoginProvider with ChangeNotifier {
       "GuardianId": data['GuardianId'],
       "Type": data['role'] == "Guardian" ? "Student" : "Staff"
     });
+    print({
+      "SchoolId": data["SchoolId"],
+      "AcademicyearId": data["AcademicYearId"],
+      "MobileToken": token,
+      "StaffId": data.containsKey('StaffId') ? data['StaffId'] : null,
+      "StudentPresentDetailsId":
+          data.containsKey('PresentDetailId') ? data["PresentDetailId"] : null,
+      "GuardianId": data['GuardianId'],
+      "Type": data['role'] == "Guardian" ? "Student" : "Staff"
+    });
 
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
       log("student Token added");
       // debugPrint(await response.stream.bytesToString());

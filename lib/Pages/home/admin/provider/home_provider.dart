@@ -15,10 +15,15 @@ class HomeProvider with ChangeNotifier {
   }
 
   MenuItem? selectedMenumodel;
-  setselectedMenumodel(MenuItem model) {
-    selectedMenumodel = model;
-    expand = true;
-    notifyListeners();
+  setselectedMenumodel(MenuItem model, BuildContext context) {
+    if (model.title == "Webview") {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => model.page!));
+    } else {
+      selectedMenumodel = model;
+      expand = true;
+      notifyListeners();
+    }
   }
 
   List<SubMenu> subMenulist = [

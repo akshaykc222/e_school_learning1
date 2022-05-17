@@ -31,6 +31,7 @@ class StudentNotification with ChangeNotifier {
 
   clearAllFilters() {
     filtersDivision = "";
+    filterCourse = "";
 
     notifyListeners();
   }
@@ -76,6 +77,7 @@ class StudentNotification with ChangeNotifier {
       List<StudentListModel> templist = List<StudentListModel>.from(
           data["results"].map((x) => StudentListModel.fromJson(x)));
       studentlist.addAll(templist);
+      //studentlist.sort((a, b) => a.rollNo?.compareTo(b.rollNo?));
 
       notifyListeners();
     } else {
@@ -171,6 +173,20 @@ class StudentNotification with ChangeNotifier {
     }
     selected.selected = !selected.selected!;
     print(selected.toJson());
+    notifyListeners();
+  }
+
+  void selectAll() {
+    if (studentlist.first.selected == true) {
+      studentlist.forEach((element) {
+        element.selected = false;
+      });
+    } else {
+      studentlist.forEach((element) {
+        element.selected = true;
+      });
+    }
+
     notifyListeners();
   }
 
@@ -287,7 +303,7 @@ class StudentNotification with ChangeNotifier {
     request.body = json.encode({
       "SchoolId": data["SchoolId"],
       "AcademicyearId": data["AcademicYearId"],
-      "Title": "Student Notification",
+      "Title": "Notification",
       "Body": text,
       "FromStaffId": data['role'] == "Guardian"
           ? data['PresentDetailId']
@@ -322,5 +338,76 @@ class StudentNotification with ChangeNotifier {
           .showSnackBar(const SnackBar(content: Text("Something Went Wrong")));
       debugPrint(response.reasonPhrase);
     }
+  }
+
+  List<CourseList> selectedCourse = [];
+
+  addSelectedCourse(CourseList item) {
+    if (selectedCourse.contains(item)) {
+      print("removing");
+      selectedCourse.remove(item);
+      notifyListeners();
+    } else {
+      print("adding");
+      selectedCourse.add(item);
+      notifyListeners();
+    }
+    clearAllFilters();
+    addFilterCourse(selectedCourse.first.name);
+  }
+
+  removeCourse(CourseList item) {
+    selectedCourse.remove(item);
+    notifyListeners();
+  }
+
+  removeCourseAll() {
+    selectedCourse.clear();
+    notifyListeners();
+  }
+
+  isCourseSelected(CourseList item) {
+    if (selectedCourse.contains(item)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  List<DivisionList> selectedDivision = [];
+
+  addSelectedDivision(DivisionList item) {
+    if (selectedDivision.contains(item)) {
+      print("removing");
+      selectedDivision.remove(item);
+      notifyListeners();
+    } else {
+      print("adding");
+      selectedDivision.add(item);
+      notifyListeners();
+    }
+  }
+
+  removeDivision(DivisionList item) {
+    selectedDivision.remove(item);
+    notifyListeners();
+  }
+
+  removeDivisionAll() {
+    selectedDivision.clear();
+    notifyListeners();
+  }
+
+  isDivisonSelected(DivisionList item) {
+    if (selectedDivision.contains(item)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  clearStudentList(StudentListItem) {
+    studentlist.clear();
+    notifyListeners();
   }
 }

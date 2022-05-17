@@ -1,6 +1,5 @@
 import 'dart:core';
 
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:ess_plus/Pages/notification/Student/provider/studentlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -33,6 +32,7 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
       var p = Provider.of<StudentNotification>(context, listen: false);
       p.getStudenList(loadmore: false);
       p.clearAllFilters();
+      p.removeCourseAll();
       p.getCourseList(loadmore: false);
       p.getDivisionList(loadmore: false);
     });
@@ -46,6 +46,7 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
     });
   }
 
+  final courseController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     bool _isChecked = false;
@@ -66,55 +67,160 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Row(children: [
-                    Expanded(
+                    SizedBox(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width * 0.7,
                       child: Consumer<StudentNotification>(
                           builder: (context, snapshot, child) {
-                        return DropdownSearch<String>.multiSelection(
-                          label: "Course",
-                          mode: Mode.DIALOG,
-                          popupTitle: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text("Select Course"),
-                          ),
-                          showSearchBox: true,
-                          onChanged: (List<String> val) {
-                            snapshot.addFilterCourse(val.first);
+                        return InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Dialog(
+                                    child: Consumer<StudentNotification>(
+                                        builder: (context, snapshot, child) {
+                                      return ListView.builder(
+                                          itemCount: snapshot.courselist.length,
+                                          itemBuilder: (context, index) {
+                                            return ListTile(
+                                              selectedTileColor:
+                                                  Colors.blue.shade100,
+                                              selectedColor: UIGuide.PRIMARY2,
+                                              // selected: snapshot
+                                              //     .isCourseSelected(snapshot
+                                              //         .courselist[index]),
+                                              onTap: () {
+                                                courseController.text = snapshot
+                                                    .courselist[index].name;
+                                                snapshot.addSelectedCourse(
+                                                    snapshot.courselist[index]);
+                                                Navigator.of(context).pop();
+                                              },
+                                              title: Text(snapshot
+                                                  .courselist[index].name),
+                                            );
+                                          });
+                                    }),
+                                  );
+                                });
                           },
-                          showSelectedItems: true,
-                          items: snapshot.courselist
-                              .map((e) => e.name)
-                              .toSet()
-                              .toList(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: TextField(
+                              controller: courseController,
+                              decoration: InputDecoration(
+                                labelText: "Course",
+                                hintText: "Select Course",
+                              ),
+                              enabled: false,
+                            ),
+                          ),
                         );
                       }),
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Consumer<StudentNotification>(
-                            builder: (context, snapshot, child) {
-                          return DropdownSearch<String>.multiSelection(
-                            label: "Divison",
-                            mode: Mode.DIALOG,
-                            popupTitle: const Text("Select Divison"),
-                            showSearchBox: true,
-                            onChanged: (List<String> val) {
-                              snapshot.addFilters(val.first);
-                            },
-                            showSelectedItems: true,
-                            items: snapshot.divisionlist
-                                .map((e) => e.name)
-                                .toSet()
-                                .toList(),
-                          );
-                        }),
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 60,
+                    //   width: MediaQuery.of(context).size.width * 0.4,
+                    //   child: Consumer<StudentNotification>(
+                    //       builder: (context, snapshot, child) {
+                    //     return InkWell(
+                    //       onTap: () {
+                    //         showDialog(
+                    //             context: context,
+                    //             builder: (context) {
+                    //               return Dialog(
+                    //                 child: Consumer<StudentNotification>(
+                    //                     builder: (context, snapshot, child) {
+                    //                   return ListView.builder(
+                    //                       itemCount:
+                    //                           snapshot.divisionlist.length,
+                    //                       itemBuilder: (context, index) {
+                    //                         return ListTile(
+                    //                           selectedTileColor:
+                    //                               Colors.blue.shade100,
+                    //                           selectedColor: UIGuide.PRIMARY2,
+                    //                           selected: snapshot
+                    //                               .isDivisonSelected(snapshot
+                    //                                   .divisionlist[index]),
+                    //                           onTap: () {
+                    //                             snapshot.addSelectedDivision(
+                    //                                 snapshot
+                    //                                     .divisionlist[index]);
+                    //                           },
+                    //                           title: Text(snapshot
+                    //                               .divisionlist[index].name),
+                    //                         );
+                    //                       });
+                    //                 }),
+                    //               );
+                    //             });
+                    //       },
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.all(5.0),
+                    //         child: TextField(
+                    //           decoration: InputDecoration(
+                    //             labelText: "Division",
+                    //             hintText: "Select Division",
+                    //           ),
+                    //           enabled: false,
+                    //         ),
+                    //       ),
+                    //     );
+                    //   }),
+                    // ),
+
+                    // return DropdownSearch<String>.multiSelection(
+                    //   label: "Course",
+                    //   mode: Mode.DIALOG,
+                    //   popupTitle: const Padding(
+                    //     padding: EdgeInsets.all(8.0),
+                    //     child: Text("Select Course"),
+                    //   ),
+                    //   showSearchBox: true,
+                    //   onChanged: (List<String> val) {
+                    //     snapshot.clearAllFilters();
+                    //     snapshot.addFilterCourse(val.first);
+                    //   },
+                    //   //showSelectedItems: false,
+                    //   items: snapshot.courselist
+                    //       .map((e) => e.name)
+                    //       .toSet()
+                    //       .toList(),
+                    // );
+
+                    // SizedBox(
+                    //   height: 60,
+                    //   width: MediaQuery.of(context).size.width * 0.4,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(left: 10),
+                    //     child: Consumer<StudentNotification>(
+                    //         builder: (context, snapshot, child) {
+                    //       return DropdownSearch<String>.multiSelection(
+                    //         label: "Divison",
+                    //         mode: Mode.DIALOG,
+                    //         popupTitle: const Text("Select Divison"),
+                    //         showSearchBox: true,
+                    //         onChanged: (List<String> val) {
+                    //           snapshot.addFilters(val.first);
+                    //         },
+                    //         showSelectedItems: true,
+                    //         items: snapshot.divisionlist
+                    //             .map((e) => e.name)
+                    //             .toSet()
+                    //             .toList(),
+                    //       );
+                    //     }),
+                    //   ),
+                    // ),
                     Expanded(
                         child: Padding(
                       padding: const EdgeInsets.only(left: 2),
                       child: RawMaterialButton(
                         onPressed: () async {
+                          Provider.of<StudentNotification>(context,
+                                  listen: false)
+                              .clearStudentList(StudentListItem);
                           showDialog(
                               context: context,
                               builder: (context) {
@@ -130,11 +236,11 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
                         child: const Text(
                           "View",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Colors.white,
                           ),
                         ),
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(16.0),
                         shape: const CircleBorder(),
                       ),
                     )),
@@ -163,7 +269,11 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
                               color: UIGuide.PRIMARY,
                               fontWeight: FontWeight.bold),
                         ),
-                        SvgPicture.asset(UIGuide.notcheck),
+                        InkWell(
+                            onTap: () {
+                              snap.selectAll();
+                            },
+                            child: SvgPicture.asset(UIGuide.notcheck)),
                       ],
                     ),
                   )
@@ -179,13 +289,9 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
                       shrinkWrap: false,
                       itemCount: value.studentlist.length == 0
                           ? 0
-                          : value.studentlist.length + 1,
+                          : value.studentlist.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return value.studentlist.length == index
-                            ? const Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : StudentListItem(model: value.studentlist[index]);
+                        return StudentListItem(model: value.studentlist[index]);
                       },
                     );
                   },

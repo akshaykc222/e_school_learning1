@@ -32,6 +32,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
     WidgetsBinding.instance!.addPostFrameCallback((_) => _scrollToBottom());
     String val = '''
 1.School Annual day will be hold on 10-01-2022.
+
 2.Last date for CBSE online registration is postponed to 05-01-2022.
 3.Cbse Model exams will bes starts on 11-02-2022.
 ''';
