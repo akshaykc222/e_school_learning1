@@ -10,12 +10,14 @@ class UIGuide {
   static const String student = "assets/stud.png";
   static const String pay = "assets/pay.png";
   static const String board = "assets/blackboard.png";
-  static const String school = "assets/school.png";
+  static const String school = "assets/school1.png";
+  static const String homeback = "assets/appbackground.jpg";
   static const String notcheck = "assets/square.svg";
   static const String check = "assets/check-square.svg";
   static const String profile = "assets/Profile.png";
   static const String reportcard = "assets/Reportcard.png";
   static const String baseURL = "https://api.schooltestonline.xyz";
+
 
   static const Color WHITE = Colors.white;
   static const Color BLACK = Colors.black;

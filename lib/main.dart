@@ -3,6 +3,7 @@ import 'package:ess_plus/Pages/ActivatePage.dart';
 import 'package:ess_plus/Pages/LoginPageWeb.dart';
 import 'package:ess_plus/Pages/home/body.dart';
 import 'package:ess_plus/Pages/login/body.dart';
+import 'package:ess_plus/Pages/login/body2.dart';
 import 'package:ess_plus/routes.dart';
 import 'package:ess_plus/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -129,6 +130,7 @@ class _GjInfoTechState extends State<GjInfoTech> {
       child: MaterialApp(
         title: 'Ess Plus',
         theme: ThemeData(
+          primaryColor: UIGuide.PRIMARY,
           // This is the theme of your application.
           //
           // Try running your application with "flutter run". You'll see the
@@ -146,7 +148,8 @@ class _GjInfoTechState extends State<GjInfoTech> {
         ),
         // home: MyHomePage(title: 'Flutter Demo Home Page'),
         routes: routes,
-        home: SplashFuturePage(),
+        //home: SplashFuturePage(),
+        home:LoginSecondPage(),
       ),
     );
   }

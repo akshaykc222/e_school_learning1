@@ -176,15 +176,18 @@ class StudentNotification with ChangeNotifier {
     notifyListeners();
   }
 
+  bool isselectAll = false;
   void selectAll() {
     if (studentlist.first.selected == true) {
       studentlist.forEach((element) {
         element.selected = false;
       });
+      isselectAll = false;
     } else {
       studentlist.forEach((element) {
         element.selected = true;
       });
+      isselectAll = true;
     }
 
     notifyListeners();

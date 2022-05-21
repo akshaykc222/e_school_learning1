@@ -269,11 +269,18 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
                               color: UIGuide.PRIMARY,
                               fontWeight: FontWeight.bold),
                         ),
-                        InkWell(
-                            onTap: () {
-                              snap.selectAll();
-                            },
-                            child: SvgPicture.asset(UIGuide.notcheck)),
+                        Consumer<StudentNotification>(
+                          builder: (context, snap, child) {
+                            return InkWell(
+                              onTap: () {
+                                snap.selectAll();
+                              },
+                              child: snap.isselectAll
+                                  ? SvgPicture.asset(UIGuide.check)
+                                  : SvgPicture.asset(UIGuide.notcheck),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   )

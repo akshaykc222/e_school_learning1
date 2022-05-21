@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ess_plus/Pages/LoginPageWeb.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,12 +47,12 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
       print(res.accessToken);
       Provider.of<LoginProvider>(context, listen: false).getToken(context);
       var parsedResponse = await parseJWT();
-      if (parsedResponse['role'] == "Guardian") {
+      if (parsedResponse['role'] == "SystemAdmin") {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPageWeb()));
+            context, MaterialPageRoute(builder: (context) => AdminHomePage()));
       } else {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const AdminHomePage()));
+            MaterialPageRoute(builder: (context) => const LoginPageWeb()));
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -156,6 +157,9 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+
+    double _width = MediaQuery.of(context).size.width;
+    double _height = MediaQuery.of(context).size.height;
     return Scaffold(
       //backgroundColor: Color(0xff292C31),
       backgroundColor: UIGuide.offwhite,
@@ -165,7 +169,9 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const SizedBox(),
+              const SizedBox(
+                height: 150,
+              ),
               const Text(
                 'SIGN IN',
                 style: TextStyle(
@@ -203,23 +209,88 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
               // ),
             ],
           ),
-          SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              height: 55,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: UIGuide.PRIMARY,
+
+
+          //old signin
+          // ----
+          // SizedBox(
+          //     width: MediaQuery.of(context).size.width * 0.7,
+          //     height: 55,
+          //     child: ElevatedButton(
+          //         style: ElevatedButton.styleFrom(
+          //           primary: UIGuide.PRIMARY,
+          //         ),
+          //         onPressed: () {
+          //           checkLogin(username.text.trim(), password.text.trim());
+          //         },
+          //         child: Text(
+          //           'SIGN-IN',
+          //           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          //         ))),
+          // SizedBox(
+          //   height: MediaQuery.of(context).size.height * 0.1,
+          // ),
+
+Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 200),
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: _width * .07),
+                            height: _width * .5,
+                            width: _width * .5,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  Color(0xff610815),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Transform.scale(
+                            scale: _animation.value,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () {
+                                HapticFeedback.lightImpact();
+                                checkLogin(username.text, password.text);
+                              },
+                              child: Container(
+                                height: _width * .2,
+                                width: _width * .2,
+                                alignment: Alignment.center,
+                                decoration: const BoxDecoration(
+                                  //color: Color(0xffA9DED8),
+                                  color: UIGuide.PRIMARY,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Text(
+                                  'SIGN-IN',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  onPressed: () {
-                    checkLogin(username.text.trim(), password.text.trim());
-                  },
-                  child: Text(
-                    'SIGN-IN',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                  ))),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
+                ),
+
           Container(
             padding: EdgeInsets.only(bottom: 20),
             height: 80,

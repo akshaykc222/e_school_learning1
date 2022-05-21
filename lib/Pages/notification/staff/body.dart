@@ -1,6 +1,5 @@
 import 'dart:core';
 
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:ess_plus/Pages/notification/staff/provider/stafflist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -55,7 +54,7 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
       body: Container(
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: Consumer<StaffNotification>(builder: (context, snap, child) {
             return Column(children: [
               Container(
@@ -63,56 +62,59 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Row(children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Consumer<StaffNotification>(
-                            builder: (context, snapshot, child) {
-                          return DropdownSearch<String>.multiSelection(
-                            label: "Category",
-                            mode: Mode.DIALOG,
-                            popupTitle: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text("Select Category "),
-                            ),
-                            showSearchBox: true,
-                            showSelectedItems: true,
-                            items: snapshot.stafflist
-                                .map((e) => e.staffRole ?? "")
-                                .toSet()
-                                .toList(),
-                          );
-                        }),
-                      ),
-                    ),
-                    Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.only(left: 2),
-                      child: RawMaterialButton(
-                        onPressed: () async {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return spinkit;
-                              });
-                          await Provider.of<StaffNotification>(context,
-                                  listen: false)
-                              .getStaffList();
-                          Navigator.pop(context);
-                        },
-                        elevation: 2.0,
-                        fillColor: UIGuide.PRIMARY,
-                        child: const Text(
-                          "View",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                        padding: EdgeInsets.all(20.0),
-                        shape: CircleBorder(),
-                      ),
-                    )),
+                    // Expanded(
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(right: 8.0),
+                    //     child: Consumer<StaffNotification>(
+                    //         builder: (context, snapshot, child) {
+                    //       return DropdownSearch<String>.multiSelection(
+                    //         label: "Category",
+                    //         mode: Mode.DIALOG,
+                    //         popupTitle: const Padding(
+                    //           padding: EdgeInsets.all(8.0),
+                    //           child: Text("Select Category "),
+                    //         ),
+                    //         showSearchBox: true,
+                    //         showSelectedItems: true,
+                    //         items: snapshot.stafflist
+                    //             .map((e) => e.staffRole ?? "")
+                    //             .toSet()
+                    //             .toList(),
+                    //       );
+                    //     }),
+                    //   ),
+                    // ),
+
+                    // Expanded(
+                    //     child: Padding(
+                    //   padding: const EdgeInsets.only(left: 2),
+                    //   child: RawMaterialButton(
+                    //     onPressed: () async {
+                    //       Provider.of<StaffNotification>(context, listen: false)
+                    //           .clearSaffList(StaffListItem);
+                    //       showDialog(
+                    //           context: context,
+                    //           builder: (context) {
+                    //             return spinkit;
+                    //           });
+                    //       await Provider.of<StaffNotification>(context,
+                    //               listen: false)
+                    //           .getStaffList();
+                    //       Navigator.pop(context);
+                    //     },
+                    //     elevation: 2.0,
+                    //     fillColor: UIGuide.PRIMARY,
+                    //     child: const Text(
+                    //       "View",
+                    //       style: TextStyle(
+                    //         fontSize: 20,
+                    //         color: Colors.white,
+                    //       ),
+                    //     ),
+                    //     padding: EdgeInsets.all(20.0),
+                    //     shape: CircleBorder(),
+                    //   ),
+                    // )),
                   ]),
                 ),
               ),
@@ -120,7 +122,7 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
               Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: const EdgeInsets.all(16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -131,11 +133,18 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
                               color: UIGuide.PRIMARY,
                               fontWeight: FontWeight.bold),
                         ),
-                        InkWell(
-                            onTap: () {
-                              snap.selectAllStaff();
-                            },
-                            child: SvgPicture.asset(UIGuide.notcheck)),
+                        Consumer<StaffNotification>(
+                          builder: (context, snap, child) {
+                            return InkWell(
+                              onTap: () {
+                                snap.selectAllStaff();
+                              },
+                              child: snap.isSelectAllStaff
+                                  ? SvgPicture.asset(UIGuide.check)
+                                  : SvgPicture.asset(UIGuide.notcheck),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   )

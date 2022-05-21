@@ -32,6 +32,7 @@ class StaffNotification with ChangeNotifier {
 
   List<StaffListModel> stafflist = [];
   List<StaffListModel> selectedList = [];
+
   Future<bool> getStaffList({bool? loadmore}) async {
     if (loadmore == true) {
       pageno = pageno + 1;
@@ -100,17 +101,25 @@ class StaffNotification with ChangeNotifier {
     notifyListeners();
   }
 
+  bool isSelectAllStaff = false;
   void selectAllStaff() {
     if (stafflist.first.selected == true) {
       stafflist.forEach((element) {
         element.selected = false;
       });
+      isSelectAllStaff = false;
     } else {
       stafflist.forEach((element) {
         element.selected = true;
       });
+      isSelectAllStaff = true;
     }
 
+    notifyListeners();
+  }
+
+  clearSaffList(StaffListItem) {
+    stafflist.clear();
     notifyListeners();
   }
 

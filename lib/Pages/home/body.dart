@@ -39,7 +39,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 50),
+        preferredSize: const Size(double.infinity, 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: const [
@@ -50,7 +50,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
       body: Stack(children: [
         Container(
           padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 8),
-          height: MediaQuery.of(context).size.height / 4,
+          height: MediaQuery.of(context).size.height / 6,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(UIGuide.school),
@@ -90,9 +90,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
           ),
         ),
         DraggableScrollableSheet(
-          initialChildSize: .7,
-          minChildSize: .7,
-          maxChildSize: .95,
+          initialChildSize: .82,
+          minChildSize: .82,
+          maxChildSize: .90,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
               decoration: const BoxDecoration(
