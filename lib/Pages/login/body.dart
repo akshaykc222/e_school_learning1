@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ess_plus/Pages/LoginPageWeb.dart';
+import 'package:ess_plus/Pages/home/body2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -49,7 +50,7 @@ class _LoginUIState extends State<LoginUI> with SingleTickerProviderStateMixin {
       var parsedResponse = await parseJWT();
       if (parsedResponse['role'] == "SystemAdmin") {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AdminHomePage()));
+            context, MaterialPageRoute(builder: (context) => LoginSecondPage()));
       } else {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const LoginPageWeb()));

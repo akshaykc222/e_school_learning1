@@ -28,8 +28,10 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      Provider.of<StaffNotification>(context, listen: false)
-          .getStaffList(loadmore: false);
+      var pv=Provider.of<StaffNotification>(context, listen: false);
+          pv.getStaffList(loadmore: false);
+          pv.clearAllFilters();
+          pv.selectedList.clear();
     });
     scrollcontroller.addListener(() {
       if (scrollcontroller.position.pixels ==
@@ -151,7 +153,7 @@ class _StaffNotificationPageState extends State<StaffNotificationPage> {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.65,
+                height: MediaQuery.of(context).size.height * 0.75,
                 child: Consumer<StaffNotification>(
                   builder: (context, value, child) {
                     return ListView.builder(

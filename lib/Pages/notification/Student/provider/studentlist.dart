@@ -42,6 +42,7 @@ class StudentNotification with ChangeNotifier {
       pageno = pageno + 1;
     } else {
       studentlist.clear();
+      isselectAll = false;
       pageno = 0;
     }
     SharedPreferences _pref = await SharedPreferences.getInstance();

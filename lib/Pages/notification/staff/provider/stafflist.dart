@@ -26,8 +26,10 @@ class StaffNotification with ChangeNotifier {
 
   clearAllFilters() {
     filtersDesignation = "";
+    filterCategory="";
 
     notifyListeners();
+
   }
 
   List<StaffListModel> stafflist = [];
@@ -36,6 +38,12 @@ class StaffNotification with ChangeNotifier {
   Future<bool> getStaffList({bool? loadmore}) async {
     if (loadmore == true) {
       pageno = pageno + 1;
+    }
+    else{
+      stafflist.clear();
+      isSelectAllStaff=false;
+      pageno=0;
+
     }
 
     SharedPreferences _pref = await SharedPreferences.getInstance();

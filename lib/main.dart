@@ -2,8 +2,8 @@ import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:ess_plus/Pages/ActivatePage.dart';
 import 'package:ess_plus/Pages/LoginPageWeb.dart';
 import 'package:ess_plus/Pages/home/body.dart';
+import 'package:ess_plus/Pages/home/body2.dart';
 import 'package:ess_plus/Pages/login/body.dart';
-import 'package:ess_plus/Pages/login/body2.dart';
 import 'package:ess_plus/routes.dart';
 import 'package:ess_plus/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -148,8 +148,8 @@ class _GjInfoTechState extends State<GjInfoTech> {
         ),
         // home: MyHomePage(title: 'Flutter Demo Home Page'),
         routes: routes,
-        //home: SplashFuturePage(),
-        home:LoginSecondPage(),
+        home: SplashFuturePage(),
+       // home:LoginSecondPage(),
       ),
     );
   }
@@ -169,10 +169,10 @@ class _SplashFuturePageState extends State<SplashFuturePage> {
     if (prefs.getBool('activated') != null) {
       if (prefs.getString('accesstoken') != null) {
         var data = await parseJWT();
-        if (data['role'] == "Guardian") {
-          return Future.value(LoginPageWeb());
+        if (data['role'] == "SystemAdmin") {
+          return Future.value(LoginSecondPage());
         } else {
-          return Future.value(AdminHomePage());
+          return Future.value(LoginPageWeb());
         }
       } else {
         return Future.value(LoginUI());

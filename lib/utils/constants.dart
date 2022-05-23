@@ -12,6 +12,7 @@ class UIGuide {
   static const String board = "assets/blackboard.png";
   static const String school = "assets/school1.png";
   static const String homeback = "assets/appbackground.jpg";
+  static const String logout = "assets/logout.png";
   static const String notcheck = "assets/square.svg";
   static const String check = "assets/check-square.svg";
   static const String profile = "assets/Profile.png";
