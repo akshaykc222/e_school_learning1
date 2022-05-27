@@ -22,7 +22,11 @@ class StudentNotification with ChangeNotifier {
 
   addFilterCourse(String course) {
     filterCourse = course;
+
+
     notifyListeners();
+
+
   }
 
   addFilters(String f) {
@@ -92,8 +96,8 @@ class StudentNotification with ChangeNotifier {
   List<CourseList> courselist = [];
   Future<bool> getCourseList({bool? loadmore}) async {
     if (loadmore == true) {
-      pageno = pageno + 1;
-    }
+       pageno = pageno + 1;
+     }
     SharedPreferences _pref = await SharedPreferences.getInstance();
     print(_pref.getString('token'));
     var headers = {

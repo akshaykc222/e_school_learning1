@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class StudentListModel {
   StudentListModel({
     required this.presentDetailsId,
@@ -60,6 +62,8 @@ class CourseList {
   String name;
   int sectionOrder;
   int courseOrder;
+
+
 
   factory CourseList.fromJson(Map<String, dynamic> json) => CourseList(
         courseId: json["courseId"],

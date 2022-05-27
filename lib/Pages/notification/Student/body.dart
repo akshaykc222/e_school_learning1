@@ -51,6 +51,7 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
   Widget build(BuildContext context) {
     bool _isChecked = false;
 
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Notification To Students"),
@@ -84,6 +85,7 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
                                           itemCount: snapshot.courselist.length,
                                           itemBuilder: (context, index) {
                                             return ListTile(
+
                                               selectedTileColor:
                                                   Colors.blue.shade100,
                                               selectedColor: UIGuide.PRIMARY2,
@@ -95,6 +97,7 @@ class _StudentNotificationPageState extends State<StudentNotificationPage> {
                                                     .courselist[index].name;
                                                 snapshot.addSelectedCourse(
                                                     snapshot.courselist[index]);
+
                                                 Navigator.of(context).pop();
                                               },
                                               title: Text(snapshot

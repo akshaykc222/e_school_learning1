@@ -3,6 +3,7 @@ import 'package:ess_plus/Pages/ActivatePage.dart';
 import 'package:ess_plus/Pages/LoginPageWeb.dart';
 import 'package:ess_plus/Pages/home/body.dart';
 import 'package:ess_plus/Pages/home/body2.dart';
+import 'package:ess_plus/Pages/home/body4.dart';
 import 'package:ess_plus/Pages/login/body.dart';
 import 'package:ess_plus/routes.dart';
 import 'package:ess_plus/utils/constants.dart';
@@ -149,7 +150,8 @@ class _GjInfoTechState extends State<GjInfoTech> {
         // home: MyHomePage(title: 'Flutter Demo Home Page'),
         routes: routes,
         home: SplashFuturePage(),
-       // home:LoginSecondPage(),
+        //home : MyHomepage(),
+        //home:LoginSecondPage(),
       ),
     );
   }
